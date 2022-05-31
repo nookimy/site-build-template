@@ -30,5 +30,27 @@ let path = {
         img:  source_folder + "/img/**/*.{jpg,png,svg,gif,ico,webp}",
     },
     // Путь к папке проекта, которую нужно удалять каждый раз при запуске
-    clean: "./" + project_folder + "/"
+    clean: "./" + project_folder + "/",
 };
+
+// Команды для задач
+let { src, dest } = require('gulp'),
+    gulp = require ('gulp'),
+    browsersync = require("browser-sync").create();
+
+// Live-сервер для разработки
+function browserSync () {
+    browsersync.init ({
+        server:{
+            baseDir: "./" + project_folder + "/"
+        },
+        port:3000,
+        notify:false
+    })
+}
+
+let watch = gulp.parallel(browserSync);
+
+exports.watch = watch;
+exports.default = watch;
+
