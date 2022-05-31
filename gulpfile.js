@@ -16,7 +16,7 @@ let path = {
     },
     // Пути до исходников
     src: {
-        html: source_folder + "/",
+        html: source_folder + "/*.html",
         css: source_folder + "/scss/style.scss",
         js:  source_folder + "/js/script.js",
         img:  source_folder + "/img/**/*.{jpg,png,svg,gif,ico,webp}",
@@ -47,10 +47,20 @@ function browserSync () {
         port:3000,
         notify:false
     })
-}
+};
 
-let watch = gulp.parallel(browserSync);
+// Копируем файлы html из #src в dist
+function html() {
+    return src(path.src.html)
+        .pipe(dest(path.build.html))
+        .pipe(browsersync.stream())
+};
 
-exports.watch = watch;
+let build = gulp.series(html);
+let watch = gulp.parallel(build, browserSync);
+
+
 exports.default = watch;
-
+exports.watch = watch;
+exports.build = build;
+exports.html = html;
