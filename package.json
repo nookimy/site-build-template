@@ -1,0 +1,19 @@
+{
+  "name": "site-build-template",
+  "version": "1.0.0",
+  "description": "Сборка Gulp",
+  "main": "index.html",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/nookimy/site-build-template.git"
+  },
+  "author": "Alina Nookimy",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/nookimy/site-build-template/issues"
+  },
+  "homepage": "https://github.com/nookimy/site-build-template#readme"
+}
