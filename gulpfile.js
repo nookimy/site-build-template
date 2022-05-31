@@ -36,7 +36,8 @@ let path = {
 // Команды для задач
 let { src, dest } = require('gulp'),
     gulp = require ('gulp'),
-    browsersync = require("browser-sync").create();
+    browsersync = require("browser-sync").create(),
+    fileinclude = require("gulp-file-include");
 
 // Live-сервер для разработки
 function browserSync () {
@@ -52,6 +53,7 @@ function browserSync () {
 // Копируем файлы html из #src в dist
 function html() {
     return src(path.src.html)
+        .pipe(fileinclude())
         .pipe(dest(path.build.html))
         .pipe(browsersync.stream())
 };
