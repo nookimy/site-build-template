@@ -39,7 +39,8 @@ let { src, dest } = require('gulp'),
     browsersync = require("browser-sync").create(),
     fileinclude = require("gulp-file-include"),
     del = require("del"),
-    scss = require('gulp-sass')(require('sass'));
+    scss = require('gulp-sass')(require('sass')),
+    autoprefixer = require("gulp-autoprefixer");
 
 // Live-сервер для разработки
 function browserSync () {
@@ -65,6 +66,12 @@ function css() {
         .pipe(
             scss({
                 outputStyle: "expanded"
+            })
+        )
+        .pipe(
+            autoprefixer({
+                overrideBrowserslist: ["last 5 versions"],
+                cascade: true
             })
         )
         .pipe(dest(path.build.css))
