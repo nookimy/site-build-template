@@ -47,7 +47,8 @@ let { src, dest } = require("gulp"),
     uglify = require("gulp-uglify-es").default,
     imagemin = require("gulp-imagemin"),
     webp = require("gulp-webp"),
-    webphtml = require("gulp-webp-html");
+    webphtml = require("gulp-webp-html"),
+    webpcss = require("gulp-webpcss");
 
 
 // Live-сервер для разработки
@@ -87,10 +88,14 @@ function css() {
                 cascade: true
             })
         )
-        .pipe(dest(path.build.css))
         .pipe(
-            clean_css()
+            webpcss({
+                webpClass: '.webp',
+                noWebpClass: '.no-webp'
+            })
         )
+        .pipe(dest(path.build.css))
+        .pipe(clean_css())
         .pipe(
             rename({
                 extname: ".min.css"

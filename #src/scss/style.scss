@@ -20,6 +20,12 @@ div {
   }
 }
 
-img {
-  width: 100%;
+
+
+.webp div {
+  background: url("../img/image.webp") 0 0 no-repeat;
+}
+
+.no-webp div {
+  background: url("../img/image.jpg") 0 0 no-repeat;
 }
