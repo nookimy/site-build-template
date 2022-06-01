@@ -40,7 +40,8 @@ let { src, dest } = require('gulp'),
     fileinclude = require("gulp-file-include"),
     del = require("del"),
     scss = require('gulp-sass')(require('sass')),
-    autoprefixer = require("gulp-autoprefixer");
+    autoprefixer = require("gulp-autoprefixer"),
+    group_media= require("gulp-group-css-media-queries");
 
 // Live-сервер для разработки
 function browserSync () {
@@ -67,6 +68,9 @@ function css() {
             scss({
                 outputStyle: "expanded"
             })
+        )
+        .pipe(
+            group_media()
         )
         .pipe(
             autoprefixer({
