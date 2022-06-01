@@ -34,12 +34,12 @@ let path = {
 };
 
 // Команды для задач
-let { src, dest } = require('gulp'),
-    gulp = require ('gulp'),
+let { src, dest } = require("gulp"),
+    gulp = require ("gulp"),
     browsersync = require("browser-sync").create(),
     fileinclude = require("gulp-file-include"),
     del = require("del"),
-    scss = require('gulp-sass')(require('sass')),
+    scss = require("gulp-sass")(require("sass")),
     autoprefixer = require("gulp-autoprefixer"),
     group_media= require("gulp-group-css-media-queries");
 
