@@ -51,7 +51,9 @@ let { src, dest } = require("gulp"),
     webpcss = require("gulp-webpcss"),
     svgSprite = require("gulp-svg-sprite"),
     ttf2woff = require("gulp-ttf2woff"),
-    ttf2woff2 = require("gulp-ttf2woff2");
+    ttf2woff2 = require("gulp-ttf2woff2"),
+    fonter = require("gulp-fonter");
+
 
 
 // Live-сервер для разработки
@@ -146,7 +148,7 @@ function images() {
         .pipe(browsersync.stream())
 };
 
-//Обработка шрифтов
+// Конвертация ttf в форматы woff
 function fonts() {
     src(path.src.fonts)
         .pipe(ttf2woff())
@@ -155,6 +157,15 @@ function fonts() {
         .pipe(ttf2woff2())
         .pipe(dest(path.build.fonts));
 }
+
+// Конвертация шрифтов из otf в ttf
+gulp.task("otf2ttf", function () {
+    return gulp.src([source_folder + "/fonts/*.otf"])
+        .pipe(fonter({
+            formats: ["ttf"]
+        }))
+        .pipe(dest(source_folder + "/fonts/"))
+})
 
 //Создание svg-спрайта
 gulp.task("svgSprite", function () {
