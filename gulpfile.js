@@ -41,7 +41,8 @@ let { src, dest } = require("gulp"),
     del = require("del"),
     scss = require("gulp-sass")(require("sass")),
     autoprefixer = require("gulp-autoprefixer"),
-    group_media= require("gulp-group-css-media-queries");
+    group_media= require("gulp-group-css-media-queries"),
+    clean_css= require("gulp-clean-css");
 
 // Live-сервер для разработки
 function browserSync () {
@@ -77,6 +78,9 @@ function css() {
                 overrideBrowserslist: ["last 5 versions"],
                 cascade: true
             })
+        )
+        .pipe(
+            clean_css()
         )
         .pipe(dest(path.build.css))
         .pipe(browsersync.stream())
