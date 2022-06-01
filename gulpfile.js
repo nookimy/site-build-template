@@ -48,7 +48,8 @@ let { src, dest } = require("gulp"),
     imagemin = require("gulp-imagemin"),
     webp = require("gulp-webp"),
     webphtml = require("gulp-webp-html"),
-    webpcss = require("gulp-webpcss");
+    webpcss = require("gulp-webpcss"),
+    svgSprite = require("gulp-svg-sprite");
 
 
 // Live-сервер для разработки
@@ -142,6 +143,21 @@ function images() {
         .pipe(dest(path.build.img))
         .pipe(browsersync.stream())
 };
+
+//Создание svg-спрайта
+gulp.task("svgSprite", function () {
+    return gulp.src([source_folder + "/iconsprite/*.svg"])
+        .pipe(svgSprite({
+            mode: {
+                stack: {
+                    sprite: "../icons/icons.svg",
+                    example: true
+                }
+            },
+        }
+        ))
+        .pipe(dest(path.build.img))
+})
 
 // Слежка за изменениями в файлах
 function watchFiles () {
