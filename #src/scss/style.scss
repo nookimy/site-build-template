@@ -1,7 +1,7 @@
 body {
   color: blue;
   font-size: 32px;
-  display: flex;
+
 }
 
 span {
@@ -18,4 +18,8 @@ div {
   @media (min-width: 768px) {
     font-size: 52px;
   }
+}
+
+img {
+  width: 100%;
 }
