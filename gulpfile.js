@@ -41,8 +41,10 @@ let { src, dest } = require("gulp"),
     del = require("del"),
     scss = require("gulp-sass")(require("sass")),
     autoprefixer = require("gulp-autoprefixer"),
-    group_media= require("gulp-group-css-media-queries"),
-    clean_css= require("gulp-clean-css");
+    group_media = require("gulp-group-css-media-queries"),
+    clean_css = require("gulp-clean-css"),
+    rename = require("gulp-rename");
+
 
 // Live-сервер для разработки
 function browserSync () {
@@ -79,8 +81,14 @@ function css() {
                 cascade: true
             })
         )
+        .pipe(dest(path.build.css))
         .pipe(
             clean_css()
+        )
+        .pipe(
+            rename({
+                extname: ".min.css"
+            })
         )
         .pipe(dest(path.build.css))
         .pipe(browsersync.stream())
