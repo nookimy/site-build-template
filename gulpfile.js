@@ -10,8 +10,13 @@ global.app = {
     gulp: gulp
 }
 
+// Импорт задач
+import { copy } from "./gulp/tasks/copy.js";
 
-let fs = require("fs");
+// Выполнение сценария по умолчанию
+gulp.task("default", copy);
+
+/*let fs = require("fs");
 
 // Команды для задач
 let browsersync = require("browser-sync").create(),
@@ -138,7 +143,7 @@ function fonts() {
 
 // Конвертация шрифтов из otf в ttf
 gulp.task("otf2ttf", function () {
-    return gulp.src([source_folder + "/fonts/*.otf"])
+    return gulp.src([source_folder + "/fonts/!*.otf"])
         .pipe(fonter({
             formats: ["ttf"]
         }))
@@ -147,7 +152,7 @@ gulp.task("otf2ttf", function () {
 
 //Создание svg-спрайта
 gulp.task("svgSprite", function () {
-    return gulp.src([source_folder + "/iconsprite/*.svg"])
+    return gulp.src([source_folder + "/iconsprite/!*.svg"])
         .pipe(svgSprite({
             mode: {
                 stack: {
@@ -212,4 +217,4 @@ exports.css = css;
 exports.html = html;
 exports.build = build;
 exports.watch = watch;
-exports.default = watch;
+exports.default = watch;*/
