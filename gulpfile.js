@@ -186,8 +186,7 @@ gulp.task("svgSprite", function () {
 })
 
 // Запись информации о шрифтах в fonts.scss
-function fontsStyle(params) {
-
+function fontsStyle() {
     let file_content = fs.readFileSync(source_folder + '/scss/fonts.scss');
     if (file_content == '') {
         fs.writeFile(source_folder + '/scss/fonts.scss', '', cb);

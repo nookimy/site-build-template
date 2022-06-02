@@ -1,6 +1,5 @@
 // Подключение шрифтов
 @mixin font($font_name, $file_name, $weight, $style) {
-
   @font-face {
     font-family: $font_name;
     font-display: swap;
@@ -13,7 +12,7 @@
 @import "fonts";
 
 body {
-  color: blue;
+  color: red;
   font-size: 32px;
 }
 
