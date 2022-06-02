@@ -4,6 +4,9 @@ let source_folder = "#src";
 // Папка продакшена
 let project_folder = "dist";
 
+//
+let fs = require("fs");
+
 // Пути к файлам и папкам
 let path = {
     // Пути к папкам продакшена
@@ -182,6 +185,30 @@ gulp.task("svgSprite", function () {
         .pipe(dest(path.build.img))
 })
 
+// Запись информации о шрифтах в fonts.scss
+function fontsStyle(params) {
+
+    let file_content = fs.readFileSync(source_folder + '/scss/fonts.scss');
+    if (file_content == '') {
+        fs.writeFile(source_folder + '/scss/fonts.scss', '', cb);
+        return fs.readdir(path.build.fonts, function (err, items) {
+            if (items) {
+                let c_fontname;
+                for (var i = 0; i < items.length; i++) {
+                    let fontname = items[i].split('.');
+                    fontname = fontname[0];
+                    if (c_fontname != fontname) {
+                        fs.appendFile(source_folder + '/scss/fonts.scss', '@include font("' + fontname + '", "' + fontname + '", "400", "normal");\r\n', cb);
+                    }
+                    c_fontname = fontname;
+                }
+            }
+        })
+    }
+}
+
+function cb() { }
+
 // Слежка за изменениями в файлах
 function watchFiles () {
     gulp.watch([path.watch.html], html);
@@ -199,9 +226,10 @@ function clean () {
     return del(path.clean);
 };
 
-let build = gulp.series(clean, gulp.parallel(js, css, html, images, fonts));
+let build = gulp.series(clean, gulp.parallel(js, css, html, images, fonts), fontsStyle);
 let watch = gulp.parallel(build, watchFiles, browserSync);
 
+exports.fontsStyle = fontsStyle;
 exports.fonts = fonts;
 exports.images = images;
 exports.js = js;
