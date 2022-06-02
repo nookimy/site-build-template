@@ -2,7 +2,13 @@
 import gulp from "gulp";
 
 // Импорт модулей
-import { path } from "./gulp/config/path";
+import { path } from "./gulp/config/path.js";
+
+//Передаем значения в глобальную переменную
+global.app = {
+    path: path,
+    gulp: gulp
+}
 
 
 let fs = require("fs");
