@@ -8,19 +8,23 @@ import { path } from "./gulp/config/path.js";
 global.app = {
     path: path,
     gulp: gulp
-}
+};
 
 // Импорт задач
 import { copy } from "./gulp/tasks/copy.js";
 import { reset } from "./gulp/tasks/reset.js";
+import { html } from "./gulp/tasks/html.js";
 
 // Наблюдатель за изменениями в файлах
 function watcher() {
     gulp.watch(path.watch.files, copy);
-}
+    gulp.watch(path.watch.html, html);
+};
+
+const mainTasks = gulp.parallel(copy, html);
 
 // Построение сценариев выполнения задач
-const dev = gulp.series(reset, copy, watcher);
+const dev = gulp.series(reset, mainTasks, watcher);
 
 
 // Выполнение сценария по умолчанию
@@ -31,7 +35,6 @@ gulp.task("default", dev);
 // Команды для задач
 let browsersync = require("browser-sync").create(),
     fileinclude = require("gulp-file-include"),
-    del = require("del"),
     scss = require("gulp-sass")(require("sass")),
     autoprefixer = require("gulp-autoprefixer"),
     group_media = require("gulp-group-css-media-queries"),
@@ -58,15 +61,6 @@ function browserSync () {
         port:3000,
         notify:false
     })
-};
-
-// Копируем файлы html из #src в dist
-function html() {
-    return src(path.src.html)
-        .pipe(fileinclude())
-        .pipe(webphtml())
-        .pipe(dest(path.build.html))
-        .pipe(browsersync.stream())
 };
 
 // Обработка файлов стилей
@@ -199,32 +193,10 @@ function fontsStyle(params) {
 
 function cb() { }
 
-// Слежка за изменениями в файлах
-function watchFiles () {
-    gulp.watch([path.watch.html], html);
-    gulp.watch([path.watch.css], css);
-    gulp.watch([path.watch.js], js);
-    gulp.watch([path.watch.img], images);
 
-    function clean () {
-        return del(path.clean);
-    }
-};
 
-// Удаление старой версии продакшена перед сборкой
-function clean () {
-    return del(path.clean);
-};
 
-let build = gulp.series(clean, gulp.parallel(js, css, html, images, fonts), fontsStyle);
-let watch = gulp.parallel(build, watchFiles, browserSync);
 
-exports.fontsStyle = fontsStyle;
-exports.fonts = fonts;
-exports.images = images;
-exports.js = js;
-exports.css = css;
-exports.html = html;
-exports.build = build;
-exports.watch = watch;
-exports.default = watch;*/
+
+
+*/

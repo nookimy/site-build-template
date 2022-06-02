@@ -1,15 +1,13 @@
 <!DOCTYPE html>
 <html lang="ru">
-<head>
-  <meta charset="UTF-8">
-  <title>Title</title>
-  <link rel="stylesheet" href="css/style.min.css">
-</head>
+@@include("html/head.html", {
+  title: "Главная"
+})
 <body>
   <div style="display:none">
     <include src="source/img/icons/icons.svg"></include>
   </div>
-  @@include("_header.html")
+  @@include("html/header.html",{})
   <main>
       <img src="img/image.jpg" alt="" width="200px">
     <div></div>
