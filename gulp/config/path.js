@@ -6,8 +6,12 @@ const buildFolder = "./dist"; // Также можно использовать 
 const srcFolder = "./#src";
 
 const path = {
-    build: {},
-    src: {},
+    build: {
+        files: "${buildFolder}/files/",
+    },
+    src: {
+        files: "${srcFolder}/files/**/*.*",
+    },
     watch: {},
     clean: buildFolder,
     buildFolder: buildFolder,
