@@ -1,9 +1,14 @@
+// Основной модуль
+import gulp from "gulp";
+
+// Импорт модулей
+import { path } from "./gulp/config/path";
+
+
 let fs = require("fs");
 
 // Команды для задач
-let { src, dest } = require("gulp"),
-    gulp = require ("gulp"),
-    browsersync = require("browser-sync").create(),
+let browsersync = require("browser-sync").create(),
     fileinclude = require("gulp-file-include"),
     del = require("del"),
     scss = require("gulp-sass")(require("sass")),
