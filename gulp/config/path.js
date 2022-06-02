@@ -5,7 +5,7 @@ const rootFolder = nodePath.basename(nodePath.resolve());
 const buildFolder = "./dist"; // Также можно использовать rootFolder
 const srcFolder = "./#src";
 
-const path = {
+export const path = {
     build: {
         files: "${buildFolder}/files/",
     },
